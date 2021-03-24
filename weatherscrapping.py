@@ -15,17 +15,32 @@ weather_week = []
 days = []
 temps = []
 
-for item in article.find_all(class_='row row-odd row-forecast'):
-    days.append(item.div.b.text)
-    weather_week.append(item.text)
+# for item in article.find_all(class_='row row-odd row-forecast'):
+#     days.append(item.div.b.text)
+#     weather_week.append(item.text)
 
-for temp in article2.find_all(class_='temp temp-high'):
+for temp in article2.find_all(class_='forecast-tombstone'):
     temps.append(temp.text)
 
-weather_df = pd.DataFrame(weather_week, index=[days])
-weather_df.rename(columns={0: 'WeatherDescription'}, inplace=True)
-print(weather_df)
-weather_df.to_csv('Weather_in_SF.csv', mode='a')
+
+for i in range(0, len(temps), 2):
+    if temps[i] != temps[-1]:
+        days.append(temps[i] + temps[i+1])
+    else:
+        days.append(temps[-1])
+
+print(days)
+# fahrenheit to celsius
+# lambda x : (x-32)*5/9
+
+pattern_temps = re.compile(r'(High|Low)\W\s\d+\s\S[F]')
+for day in days:
+    print(pattern_temps.findall(day))
+
+# weather_df = pd.DataFrame(weather_week, index=[days])
+# weather_df.rename(columns={0: 'WeatherDescription'}, inplace=True)
+# print(weather_df)
+# weather_df.to_csv('Weather_in_SF.csv', mode='a')
 
 
 
