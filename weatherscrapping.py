@@ -25,6 +25,7 @@ for temp in article2.find_all(class_='temp temp-high'):
 weather_df = pd.DataFrame(weather_week, index=[days])
 weather_df.rename(columns={0: 'WeatherDescription'}, inplace=True)
 print(weather_df)
+weather_df.to_csv('Weather_in_SF.csv', mode='a')
 
 
 
