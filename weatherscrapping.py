@@ -1,6 +1,7 @@
 import requests as rq
 from bs4 import BeautifulSoup
 import pandas as pd
+import re
 
 
 source = rq.get("https://forecast.weather.gov/MapClick.php?lat=37.777120000000025&lon=-122.41963999999996#.YFspOK_0nIU").text
@@ -9,12 +10,26 @@ soup = BeautifulSoup(source, 'lxml')
 
 
 article = soup.find(id="detailed-forecast-body")
-#
+article2 = soup.find(id='seven-day-forecast-list')
+weather_week = []
+days = []
+temps = []
+
 for item in article.find_all(class_='row row-odd row-forecast'):
-    print(item.div.b.text)
-    print(item.text)
+    days.append(item.div.b.text)
+    weather_week.append(item.text)
 
+for temp in article2.find_all(class_='temp temp-high'):
+    temps.append(temp.text)
 
+# print(temps)
+# print(days)
+# print(weather_week)
 
+dict_weather = dict(list(zip(temps, weather_week)))
 
+#print(dict_weather)
+
+weather_df = pd.DataFrame(dict_weather, index=[days])
+print(weather_df)
 
