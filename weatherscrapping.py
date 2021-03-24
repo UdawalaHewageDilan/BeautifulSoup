@@ -22,14 +22,9 @@ for item in article.find_all(class_='row row-odd row-forecast'):
 for temp in article2.find_all(class_='temp temp-high'):
     temps.append(temp.text)
 
-# print(temps)
-# print(days)
-# print(weather_week)
-
-dict_weather = dict(list(zip(temps, weather_week)))
-
-#print(dict_weather)
-
-weather_df = pd.DataFrame(dict_weather, index=[days])
+weather_df = pd.DataFrame(weather_week, index=[days])
+weather_df.rename(columns={0: 'WeatherDescription'}, inplace=True)
 print(weather_df)
+
+
 
