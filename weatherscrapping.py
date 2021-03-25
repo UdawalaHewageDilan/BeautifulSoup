@@ -2,6 +2,7 @@ import requests as rq
 from bs4 import BeautifulSoup
 import pandas as pd
 import re
+import datetime as dt
 
 
 source = rq.get("https://forecast.weather.gov/MapClick.php?lat=37.777120000000025&lon=-122.41963999999996#.YFspOK_0nIU").text
@@ -30,12 +31,16 @@ for i in range(0, len(temps), 2):
         days.append(temps[-1])
 
 print(days)
+week_dict = {}
+for day in days:
+    week_dict[]
+
 # fahrenheit to celsius
 # lambda x : (x-32)*5/9
 
-pattern_temps = re.compile(r'(High|Low)\W\s\d+\s\S[F]')
-for day in days:
-    print(pattern_temps.findall(day))
+# pattern_temps = re.compile(r'(High|Low)\W\s\d+\s\S[F]')
+# for day in days:
+#     print(pattern_temps.findall(day))
 
 # weather_df = pd.DataFrame(weather_week, index=[days])
 # weather_df.rename(columns={0: 'WeatherDescription'}, inplace=True)
