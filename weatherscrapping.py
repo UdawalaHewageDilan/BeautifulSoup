@@ -20,20 +20,30 @@ temps = []
 #     days.append(item.div.b.text)
 #     weather_week.append(item.text)
 
-for temp in article2.find_all(class_='forecast-tombstone'):
-    temps.append(temp.text)
+#for temp in \
+print(article2)
+
+forecast = article2.find(class_='tombstone-container')[4]
+print(forecast)
+# for period in article2.find_all(class_='period-name'):
+#     print(period.text)
+    # temperature = temp.split[4]
+    # print(temperature)
+    #temps.append(temp)
 
 
-for i in range(0, len(temps), 2):
-    if temps[i] != temps[-1]:
-        days.append(temps[i] + temps[i+1])
-    else:
-        days.append(temps[-1])
+# for i in range(0, len(temps), 2):
+#     if temps[i] != temps[-1]:
+#         days.append(temps[i] + temps[i+1])
+#     else:
+#         days.append(temps[-1])
+#
+# print(days)
+# week_dict = {}
+# for day in days:
+#     print(day)
 
-print(days)
-week_dict = {}
-for day in days:
-    week_dict[]
+    #week_dict[]
 
 # fahrenheit to celsius
 # lambda x : (x-32)*5/9
